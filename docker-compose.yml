@@ -1,0 +1,9 @@
+onion-perf:
+  build: .
+  env_file: .env
+  volumes:
+    - ./scripts:/scripts
+  ports:
+    - "8080:8080"
+    - "8081:8081"
+  command: bash -c "/scripts/startup.sh"
