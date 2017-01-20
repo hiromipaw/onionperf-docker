@@ -8,7 +8,7 @@ RUN apt-get upgrade -y
 RUN apt-get install -y --fix-missing wget git gcc g++ automake cmake make libglib2.0 libglib2.0-dev \
                        libigraph0 libigraph0-dev libevent-dev openssl libssl-dev python
 
-RUN git clone https://git.torproject.org/tor.git -b release-0.2.7
+RUN git clone https://git.torproject.org/tor.git -b release-0.2.9
 WORKDIR /tor
 RUN ./autogen.sh
 RUN ./configure --disable-asciidoc
@@ -32,3 +32,9 @@ RUN apt-get install -y python-dev libxml2 libxml2-dev libxslt1-dev \
 RUN pip install stem lxml twisted networkx scipy numpy matplotlib
 RUN python setup.py build
 RUN python setup.py install
+
+RUN apt-get install -y nginx
+RUN mkdir /etc/nginx/ssl
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt
+RUN cp /config/nginx.conf /etc/nginx/sites-available/default
+RUN /etc/init.d/nginx reload

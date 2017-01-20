@@ -3,6 +3,7 @@ onion-perf:
   env_file: .env
   volumes:
     - ./scripts:/scripts
+    - ./config:/config
   ports:
     - "8080:8080"
     - "8081:8081"
