@@ -1,7 +1,7 @@
 # onionperf-docker
 OnionPerf Dockerized
 
-For more info on Onion Perf see https://github.com/robgjansen/onionperf
+For more info on OnionPerf see https://github.com/robgjansen/onionperf
 
 Run:
 
