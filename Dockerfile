@@ -8,7 +8,7 @@ RUN apt-get upgrade -y
 RUN apt-get install -y --fix-missing wget git gcc g++ automake cmake make libglib2.0 libglib2.0-dev \
                        libigraph0 libigraph0-dev libevent-dev openssl libssl-dev python
 
-RUN git clone https://git.torproject.org/tor.git -b release-0.2.9
+RUN git clone https://git.torproject.org/tor.git -b release-0.3.0
 WORKDIR /tor
 RUN ./autogen.sh
 RUN ./configure --disable-asciidoc
@@ -16,7 +16,7 @@ RUN make
 
 WORKDIR /$APPROOT
 RUN git clone https://github.com/shadow/shadow.git
-WORKDIR /shadow/src/plugin/shadow-plugin-tgen
+WORKDIR /
 RUN mkdir build
 WORKDIR /shadow/src/plugin/shadow-plugin-tgen/build
 RUN cmake .. -DSKIP_SHADOW=ON -DCMAKE_MODULE_PATH=`pwd`/../../../../cmake/
@@ -35,6 +35,3 @@ RUN python setup.py install
 
 RUN apt-get install -y nginx
 RUN mkdir /etc/nginx/ssl
-RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt
-RUN cp /config/nginx.conf /etc/nginx/sites-available/default
-RUN /etc/init.d/nginx reload
