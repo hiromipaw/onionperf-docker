@@ -10,3 +10,5 @@ Run:
     $ docker-compose run
 ```
 Visit: http://localhost:8081
+
+Please consider that the certiticates usde in ngnix config are self-signed. Consider using [letsencrypt](https://http://letsencrypt.org/) for a prod scenario.
