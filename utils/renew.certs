@@ -1,0 +1,8 @@
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/conf
+sudo cp /etc/nginx/sites-available/renew /etc/nginx/sites-available/default
+sudo iptables -t nat -F
+sudo nginx -t && sudo nginx -s reload
+sudo certbot renew --webroot-path /var/www
+sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
+sudo cp /etc/nginx/sites-available/conf /etc/nginx/sites-available/default
+sudo nginx -t && sudo nginx -s reload

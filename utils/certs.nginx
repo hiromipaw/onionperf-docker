@@ -1,0 +1,10 @@
+server {
+        listen 0.0.0.0:80;
+        server_name op-<site>.onionperf.torproject.net;
+
+
+        location /.well-known/acme-challenge {
+                root /var/www;
+        }
+
+}

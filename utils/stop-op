@@ -1,0 +1,5 @@
+#!/bin/sh -e
+for pid in $(ps -ef | awk '/onionperf/ {print $2}'); do kill -15 $pid; done;
+for pid in $(ps -ef | awk '/tgen/ {print $2}'); do kill -15 $pid; done;
+for pid in $(ps -ef | awk '/tor/ {print $2}'); do kill -15 $pid; done;
+for pid in $(ps -ef | awk '/twistd/ {print $2}'); do kill -15 $pid; done;

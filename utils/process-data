@@ -1,0 +1,11 @@
+#!/bin/bash
+
+torctl=($(ls onionperf/onionperf-data/tor-client/log_archive/*.torctl.log));
+tgen=($(ls onionperf/onionperf-data/tgen-client/log_archive/*.tgen.log));
+day=57;
+for (( i = 0 ; i < ${#torctl[@]} ; i++ )); do
+  stamp=$(date --date="$day days ago" +%Y-%m-%d);
+  let "day--";
+  echo "onionperf analyze --date-filter ${stamp} --torperf --prefix onionperf/onionperf-data/twistd/docroot/ --tgen ${tgen[$i]} --torctl ${torctl[$i]}";
+  onionperf analyze --date-filter ${stamp} --torperf --prefix onionperf/onionperf-data/twistd/docroot/ --tgen ${tgen[$i]} --torctl ${torctl[$i]};
+done
